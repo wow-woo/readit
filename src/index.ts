@@ -23,6 +23,7 @@ const main = async () => {
   const app = express();
 
   const RedisStore = connectRedis(session);
+
   const redisClient = redis.createClient();
 
   app.use(
@@ -47,7 +48,7 @@ const main = async () => {
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
       resolvers: [HelloResolver, PostResolver, UserResolver],
-      validate: false,
+      validate: true,
     }),
 
     //you can access from every resolvers

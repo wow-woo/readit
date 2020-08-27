@@ -9,7 +9,7 @@ const Post_1 = require("./entities/Post");
 const path_1 = __importDefault(require("path"));
 exports.default = {
     entities: [Post_1.Post, User_1.User],
-    dbName: "myFirst_reddick",
+    dbName: "reddick",
     password: "pg15",
     type: "postgresql",
     debug: !constants_1.__prod__,

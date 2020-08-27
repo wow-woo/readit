@@ -7,7 +7,7 @@ import path from "path";
 export default {
   entities: [Post, User],
   //make sure typing db name, not server name, +12hours
-  dbName: "myFirst_reddick",
+  dbName: "reddick",
   password: "pg15",
   type: "postgresql",
   debug: !__prod__,
