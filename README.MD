@@ -10,11 +10,19 @@
 - argon2
 - graphql
 
+### Learning flow
+
+- mikro-ORM > postgresql
+- redis > WSL2
+
 ---
 
 ## typescript
 
 decorators?
+? sign >>> possibly to be undefined
+! sign >>> possibly to be undefined, but i know it will be defined all the time
+& sign >>> join 2 different types
 
 ## graphql
 

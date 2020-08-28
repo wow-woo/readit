@@ -48,7 +48,7 @@ const main = async () => {
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
       resolvers: [HelloResolver, PostResolver, UserResolver],
-      validate: true,
+      validate: false,
     }),
 
     //you can access from every resolvers
