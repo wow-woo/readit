@@ -54,6 +54,7 @@ export class UserResolver {
   @Mutation(() => UserResponse)
   async register(
     @Arg("options") options: UsernamePasswordInput,
+    // @Ctx() { em, req }: MyContext
     @Ctx() { em }: MyContext
   ) {
     if (options.username.length <= 2) {
@@ -76,7 +77,6 @@ export class UserResolver {
         ],
       };
     }
-
     const hashedPassword = await argon2.hash(options.password);
     const user = em.create(User, {
       username: options.username,
@@ -97,6 +97,10 @@ export class UserResolver {
         };
       }
     }
+
+    //store user id session
+    //this will set a cookie on the user
+    // keep them logged in
     return { user };
   }
 
@@ -128,7 +132,7 @@ export class UserResolver {
       };
     }
 
-    req.session!.userId = user.id;
+    req.session.userId = user.id;
 
     return {
       user,

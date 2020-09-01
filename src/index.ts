@@ -13,7 +13,7 @@ import redis from "redis";
 import connectRedis from "connect-redis";
 import session from "express-session";
 import { __prod__ } from "./constants";
-import { MyContext } from "./types";
+import cors from "cors";
 
 const main = async () => {
   const orm = await MikroORM.init(microConfig);
@@ -26,6 +26,13 @@ const main = async () => {
 
   const redisClient = redis.createClient();
 
+  //set cors configuration globally
+  app.use(
+    cors({
+      origin: "http://localhost:3000",
+      credentials: true,
+    })
+  );
   app.use(
     session({
       name: "qid",
@@ -54,10 +61,15 @@ const main = async () => {
     //you can access from every resolvers
     //takes in parameters of req, res
     //access cookie/session with req, res
-    context: ({ req, res }): MyContext => ({ em: orm.em, req, res }),
+    context: ({ req, res }) => ({ em: orm.em, req, res }),
   });
 
-  apolloServer.applyMiddleware({ app });
+  apolloServer.applyMiddleware({
+    app,
+    cors: false,
+    // apollo cors setting on this route
+    // cors: { origin: "http://localhost:3000" },
+  });
 
   app.listen(4000, () => console.log("server started on 4000 port"));
 
